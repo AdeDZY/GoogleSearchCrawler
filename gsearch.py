@@ -206,7 +206,7 @@ class GoogleAPI:
                     retry -= 1
                     self.randomSleep()
                     continue
-        return search_results 
+        return search_results, retry 
 
 
 def load_user_agent():
@@ -237,7 +237,7 @@ def crawler(keyword_file, out_file):
     n_empty = 0
     while keyword:
         n_keywords += 1
-        results = api.search(keyword, num=expect_num)
+        results, retry = api.search(keyword, num=expect_num)
         if not results:
             n_empty += 1
             print keyword
@@ -247,6 +247,8 @@ def crawler(keyword_file, out_file):
             print >> outf, jstr
         if n_keywords % 10 == 0:
             print "{0} queries, {1} failed.".format(n_keywords, n_empty)
+        if retry <= 0:
+            break
         keyword = keywords.readline().strip()
     keywords.close()
     outf.close()
