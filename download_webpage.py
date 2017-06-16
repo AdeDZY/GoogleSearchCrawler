@@ -24,6 +24,7 @@ if __name__ == '__main__':
     with open(args.docid_url_file) as f:
         for line in f:
             docid, url = line.strip().split('\t')
+            url = urllib2.unquote(url)
             n_urls += 1
             try:
                 length = len(user_agents)
@@ -50,7 +51,7 @@ if __name__ == '__main__':
                 failed_urls += 1
                 print 'error:', e
                 continue
-            if n_urls%10 == 0:
+            if n_urls % 10 == 0:
                 print n_urls, failed_urls
 
     args.fout.close()
