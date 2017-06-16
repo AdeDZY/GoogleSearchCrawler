@@ -157,7 +157,7 @@ class GoogleAPI:
     # @param lang -> language of search results  
     # @param num -> number of search results to return 
     def search(self, query, lang='en', num=results_per_page):
-        self.randomSleep(0, 20)
+        self.randomSleep(0, 10)
         search_results = list()
         query = urllib2.quote(query)
         if num % results_per_page == 0:
@@ -182,6 +182,8 @@ class GoogleAPI:
                     request.add_header('User-agent', user_agent)
                     request.add_header('Accept-Encoding', 'gzip')
                     request.add_header('referer', base_url)
+                    request.add_header('connection', 'keep-alive')
+
                     response = urllib2.urlopen(request)
                     html = response.read() 
                     if response.headers.get('content-encoding', None) == 'gzip':
