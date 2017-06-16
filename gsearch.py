@@ -247,7 +247,7 @@ def crawler(keyword_file, out_file):
             print "{0} queries, {1} failed.".format(n_keywords, n_empty)
         keyword = keywords.readline().strip()
     keywords.close()
-    out_file.close()
+    outf.close()
 
 
 if __name__ == '__main__':
