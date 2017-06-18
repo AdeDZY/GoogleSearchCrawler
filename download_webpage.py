@@ -26,6 +26,8 @@ if __name__ == '__main__':
         for line in f:
             docid, url = line.strip().split('\t')
             url = urllib2.unquote(url)
+            if '.pdf' in url:
+                continue
             print url
             n_urls += 1
             try:
