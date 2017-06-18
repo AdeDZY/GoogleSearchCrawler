@@ -266,6 +266,7 @@ if __name__ == '__main__':
     parser.add_argument("--random_start", '-r', action='store_true')
     parser.add_argument("--max_url", '-m', type=int, default=80)
     args = parser.parse_args()
+    random.seed()
 
     start_number = 1
     if args.random_start:
