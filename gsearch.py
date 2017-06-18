@@ -219,7 +219,7 @@ def load_user_agent():
     fp.close()
 
 
-def crawler(keyword_file, out_file):
+def crawler(keyword_file, out_file, start_number, max_url):
     # Load use agent string from file
     load_user_agent()
 
@@ -237,6 +237,10 @@ def crawler(keyword_file, out_file):
     n_empty = 0
     while keyword:
         n_keywords += 1
+        if n_keywords < start_number:
+            continue
+        if n_keywords - start_number > max_url:
+            break
         results, retry = api.search(keyword, num=expect_num)
         if not results:
             n_empty += 1
@@ -258,5 +262,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("query_file")
     parser.add_argument("out_file")
+    parser.add_argument("--random_start", '-r', action='store_true')
+    parser.add_argument("--max_url", '-m', type=int, default=80)
     args = parser.parse_args()
-    crawler(args.query_file, args.out_file)
+
+    start_number = 1
+    if args.random_start:
+        start_number = random.randint(1, 100000 - args.max_url)
+    print "start from line {0}.".format(start_number)
+
+    crawler(args.query_file, args.out_file, start_number, args.max_url)
