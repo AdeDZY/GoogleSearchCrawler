@@ -250,10 +250,11 @@ def crawler(keyword_file, out_file, start_number, max_url):
             jstr = r.to_json_str()
             print >> outf, jstr
         if n_keywords % 10 == 0:
-            print "{0} queries, {1} failed.".format(n_keywords, n_empty)
+            print "{0} queries, {1} failed.".format(n_keywords - start_number, n_empty)
         if retry <= 0:
             break
         keyword = keywords.readline().strip()
+    print "{0} queries, {1} failed.".format(n_keywords - start_number, n_empty)
     keywords.close()
     outf.close()
 
