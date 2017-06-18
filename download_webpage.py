@@ -24,15 +24,10 @@ if __name__ == '__main__':
 
     with open(args.docid_url_file) as f:
         for line in f:
-            nlines += 1
-            if nlines < start_number:
-                continue
             docid, url = line.strip().split('\t')
             url = urllib2.unquote(url)
             print url
             n_urls += 1
-            if n_urls > args.max_url:
-                break
             try:
                 length = len(user_agents)
                 index = random.randint(0, length - 1)
