@@ -232,10 +232,10 @@ def crawler(keyword_file, out_file, start_number, max_url):
 
     keywords = open(keyword_file, 'r')
     outf = open(out_file, 'w')
-    keyword = keywords.readline().strip()
     n_keywords = 0
     n_empty = 0
-    while keyword:
+    for keyword in keywords:
+        keyword = keyword.strip()
         n_keywords += 1
         if n_keywords < start_number:
             continue
@@ -253,7 +253,6 @@ def crawler(keyword_file, out_file, start_number, max_url):
             print "{0} queries, {1} failed.".format(n_keywords - start_number, n_empty)
         if retry <= 0:
             break
-        keyword = keywords.readline().strip()
     print "{0} queries, {1} failed.".format(n_keywords - start_number, n_empty)
     keywords.close()
     outf.close()
@@ -264,6 +263,7 @@ if __name__ == '__main__':
     parser.add_argument("query_file")
     parser.add_argument("out_file")
     parser.add_argument("--random_start", '-r', action='store_true')
+    parser.add_argument("--start", '-s', type=int, default=1)
     parser.add_argument("--max_url", '-m', type=int, default=80)
     args = parser.parse_args()
     random.seed()
@@ -271,6 +271,8 @@ if __name__ == '__main__':
     start_number = 1
     if args.random_start:
         start_number = random.randint(1, 100000 - args.max_url)
+    else:
+        start_number = args.start
     print "start from line {0}.".format(start_number)
 
     crawler(args.query_file, args.out_file, start_number, args.max_url)
