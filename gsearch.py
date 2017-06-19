@@ -157,7 +157,7 @@ class GoogleAPI:
     # @param lang -> language of search results  
     # @param num -> number of search results to return 
     def search(self, query, lang='en', num=results_per_page):
-        self.randomSleep(0, 10)
+        self.randomSleep(0, 5)
         search_results = list()
         query = urllib2.quote(query)
         if num % results_per_page == 0:
