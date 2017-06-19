@@ -40,7 +40,7 @@ if __name__ == '__main__':
                 request.add_header('Accept-Encoding', 'gzip')
                 request.add_header('connection', 'keep-alive')
 
-                response = urllib2.urlopen(request)
+                response = urllib2.urlopen(request, timeout=10)
                 html = response.read()
                 if response.headers.get('content-encoding', None) == 'gzip':
                     html = gzip.GzipFile(fileobj=StringIO.StringIO(html)).read()
