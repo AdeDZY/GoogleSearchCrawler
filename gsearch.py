@@ -217,7 +217,7 @@ def load_user_agent():
     for line in bad:
         bad2.add(line.strip())
 
-    for line in 
+    for line in fp: 
         line = line.strip()
         if line in bad2: continue
         user_agents.append(line)
