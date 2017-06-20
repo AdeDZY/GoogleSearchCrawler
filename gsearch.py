@@ -211,12 +211,18 @@ class GoogleAPI:
 
 def load_user_agent():
     fp = open('./data/user_agents', 'r')
+    bad = open('./data/bad_agents', 'r')
+    bad2 = set()
 
-    line = fp.readline().strip('\n')
-    while(line):
+    for line in bad:
+        bad2.add(line.strip())
+
+    for line in 
+        line = line.strip()
+        if line in bad2: continue
         user_agents.append(line)
-        line = fp.readline().strip('\n')
     fp.close()
+    bad.close()
 
 
 def crawler(keyword_file, out_file, start_number, max_url):
