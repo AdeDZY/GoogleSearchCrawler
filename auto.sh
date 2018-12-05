@@ -17,7 +17,7 @@ HOST_IP=$(dig +short +time=1 myip.opendns.com @resolver1.opendns.com)
 REMOTE_IP="128.2.204.55"  
 #SCP\_PASSWORD\_E="Ade_10232"  
 #SCP_PASSWORD=`echo "$SCP_PASSWORD_E" `
-SCP_PASSWORD="Ade_10232"
+SCP_PASSWORD="PASSWORD"
 echo $SCP_PASSWORD
 
 
